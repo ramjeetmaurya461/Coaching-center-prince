@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prince Free Coaching Center</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    color: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .card {
+    width: min(420px, 100%);
+    border: 1px solid #ddd;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.08);
+    text-align: center;
+  }
+  h1 { margin-top: 0; }
+  input, button {
+    width: 100%;
+    padding: 14px;
+    margin: 8px 0;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+  input { border: 1px solid #bbb; }
+  button {
+    border: 0;
+    background: #222;
+    color: white;
+    cursor: pointer;
+  }
+  button:active { transform: scale(.99); }
+  .info {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 14px;
+    margin: 12px 0;
+    line-height: 1.6;
+  }
+  .small { font-size: 13px; color: #666; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+
+<section class="card" id="loginScreen">
+  <h1>Prince Free Coaching Center</h1>
+  <p>Free Demo Version</p>
+  <input id="studentName" type="text" maxlength="40" placeholder="Apna naam likho">
+  <button onclick="login()">Login</button>
+  <p class="small">Is version mein koi payment nahi hai.</p>
+</section>
+
+<section class="card hidden" id="homeScreen">
+  <h1>Prince Free Coaching Center</h1>
+  <p id="welcome"></p>
+
+  <div class="info">
+    📚 <b>Subjects</b><br>
+    ➗ Maths<br>
+    📖 Reading<br>
+    💻 Basic Coding
+  </div>
+
+  <div class="info">
+    📝 Wednesday = Test Day
+  </div>
+
+  <button onclick="showSubjects()">Coaching Start</button>
+  <button onclick="openMeet()">Google Meet Open</button>
+  <button onclick="logout()">Logout</button>
+</section>
+
+<section class="card hidden" id="subjectsScreen">
+  <h1>Subjects</h1>
+
+  <div class="info">➗ Maths</div>
+  <div class="info">📖 Reading</div>
+  <div class="info">💻 Basic Coding</div>
+
+  <p>📝 Wednesday को Test</p>
+
+  <button onclick="openMeet()">Meet Class Join</button>
+  <button onclick="goHome()">Back</button>
+</section>
+
+<script>
+function login() {
+  const name = document.getElementById("studentName").value.trim();
+
+  if (!name) {
+    alert("Pehle naam likho.");
+    return;
+  }
+
+  document.getElementById("welcome").textContent = "Welcome, " + name + " 👋";
+  document.getElementById("loginScreen").classList.add("hidden");
+  document.getElementById("homeScreen").classList.remove("hidden");
+}
+
+function showSubjects() {
+  document.getElementById("homeScreen").classList.add("hidden");
+  document.getElementById("subjectsScreen").classList.remove("hidden");
+}
+
+function goHome() {
+  document.getElementById("subjectsScreen").classList.add("hidden");
+  document.getElementById("homeScreen").classList.remove("hidden");
+}
+
+function logout() {
+  document.getElementById("subjectsScreen").classList.add("hidden");
+  document.getElementById("homeScreen").classList.add("hidden");
+  document.getElementById("loginScreen").classList.remove("hidden");
+  document.getElementById("studentName").value = "";
+}
+
+/*
+  Apna REAL Google Meet link yahan baad mein paste karna.
+  Example:
+  const meetLink = "https://meet.google.com/abc-defg-hij";
+*/
+function openMeet() {
+  const meetLink = "https://meet.google.com/";
+  window.open(meetLink, "_blank");
+}
+</script>
+
+</body>
+</html>
